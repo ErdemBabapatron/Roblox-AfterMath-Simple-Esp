@@ -31,7 +31,7 @@ local function createESP(model)
     local box = Drawing.new("Square")
     box.Size = Vector2.new(0, 0)
     box.Position = Vector2.new(0, 0)
-    box.Color = Color3.fromRGB(255, 0, 0)  -- Kırmızı kutu (zombie/player fark etmez)
+    box.Color = Color3.fromRGB(255, 0, 0)  
     box.Thickness = 2
     box.Filled = false
     box.Transparency = 1
@@ -41,9 +41,9 @@ local function createESP(model)
     nameTag.Size = 16
     nameTag.Center = true
     nameTag.Outline = true
-    nameTag.Font = 2  -- Plex
+    nameTag.Font = 2  
     nameTag.Color = Color3.fromRGB(255, 255, 255)
-    nameTag.Text = model.Name:gsub("%[", ""):gsub("%]", "")  -- UUID'yi temizle
+    nameTag.Text = model.Name:gsub("%[", ""):gsub("%]", "")  
     nameTag.Visible = false
     
     ESPs[model] = {box = box, name = nameTag, HRP = HRP}
@@ -71,7 +71,7 @@ local function updateESP()
             local pos, onScreen = WorldToScreen(esp.HRP.Position)
             
             if onScreen then
-                -- Boyut hesaplama (mesafeye göre)
+                
                 local headPos = model:FindFirstChild("Head")
                 local topPoint = Camera:WorldToViewportPoint(esp.HRP.Position + Vector3.new(0, 4, 0))
                 local bottomPoint = Camera:WorldToViewportPoint(esp.HRP.Position - Vector3.new(0, 5, 0))
@@ -114,7 +114,7 @@ scan()
 
 Entities.DescendantAdded:Connect(function(obj)
     if obj:IsA("Model") then
-        task.wait(0.1)  -- Parçalar yüklenene kadar bekle
+        task.wait(0.1)  
         createESP(obj)
     end
 end)
